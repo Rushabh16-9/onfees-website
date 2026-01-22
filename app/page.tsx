@@ -331,29 +331,62 @@ export default function Home() {
                     </div>
                 </Section>
 
-                {/* Trusted By - All Logos in Full Color */}
+                {/* Trusted By - Premium Design */}
                 <Section background="white">
-                    <SectionHeader
-                        subtitle="Our Associations"
-                        title="Trusted by Leading Institutions"
-                        description="Partnering with prestigious educational institutions across India"
-                    />
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center justify-center px-4 py-1.5 mb-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-full">
+                            <span className="text-sm font-semibold text-orange-600 uppercase tracking-wide">Our Associations</span>
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Trusted by Leading Institutions
+                        </h2>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Partnering with prestigious educational institutions across India to deliver excellence in education management
+                        </p>
+                    </div>
+
+                    {/* Logo Grid with Premium Design */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
                         {collegeLogos.map((logo, index) => (
                             <div
                                 key={index}
-                                className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105"
+                                className="group relative bg-white rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 border border-gray-100"
+                                style={{
+                                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)'
+                                }}
                             >
-                                <div className="relative w-full h-20">
+                                {/* Subtle gradient overlay on hover */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-orange-50/0 group-hover:from-primary-50/30 group-hover:to-orange-50/30 rounded-2xl transition-all duration-500" />
+
+                                {/* Logo Container */}
+                                <div className="relative h-24 flex items-center justify-center">
                                     <Image
                                         src={logo.src}
                                         alt={logo.alt}
                                         fill
-                                        className="object-contain"
+                                        className="object-contain p-2 transition-transform duration-500 group-hover:scale-110"
                                     />
                                 </div>
                             </div>
                         ))}
+                    </div>
+
+                    {/* Trust Indicators */}
+                    <div className="mt-16 pt-12 border-t border-gray-200">
+                        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
+                            <div className="space-y-2">
+                                <div className="text-3xl font-bold text-primary-600">50+</div>
+                                <div className="text-sm text-gray-600 font-medium">Partner Institutions</div>
+                            </div>
+                            <div className="space-y-2">
+                                <div className="text-3xl font-bold text-primary-600">100K+</div>
+                                <div className="text-sm text-gray-600 font-medium">Students Served</div>
+                            </div>
+                            <div className="space-y-2">
+                                <div className="text-3xl font-bold text-primary-600">7+</div>
+                                <div className="text-sm text-gray-600 font-medium">Years of Excellence</div>
+                            </div>
+                        </div>
                     </div>
                 </Section>
 
