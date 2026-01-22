@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Button from '@/components/ui/Button';
@@ -169,42 +170,51 @@ export default function Home() {
             <Header />
 
             <main className="pt-20">
-                {/* Hero Section */}
-                <Section background="gradient" className="pt-12 lg:pt-20">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h1 className="heading-xl text-gray-900 mb-6">
-                                Complete <span className="text-gradient">ERP Solution</span> for Educational Institutes
+                {/* Hero Section with Background Image */}
+                <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center">
+                    {/* Background Image with Overlay */}
+                    <div className="absolute inset-0 z-0">
+                        <Image
+                            src="/images/hero_banner.jpg"
+                            alt="Education Management"
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-900/85 to-blue-900/75" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="container-custom relative z-10 py-20">
+                        <div className="max-w-3xl">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                                Complete <span className="text-orange-400">ERP Solution</span> for Educational Institutes
                             </h1>
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                            <p className="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
                                 Transform your institution with our comprehensive platform. Streamline admissions, fees, examinations, and more while joining the #BeCashless movement.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Button
-                                    variant="primary"
+                                    variant="secondary"
                                     size="lg"
                                     href="https://meetings.hubspot.com/viral-dedhiya"
+                                    className="bg-orange-500 hover:bg-orange-600 text-white shadow-xl"
                                 >
                                     Book a Free Demo
                                     <ArrowRight className="ml-2 w-5 h-5" />
                                 </Button>
-                                <Button variant="outline" size="lg" href="/features">
+                                <Button
+                                    variant="outline"
+                                    size="lg"
+                                    href="/features"
+                                    className="border-2 border-white text-white hover:bg-white hover:text-blue-900"
+                                >
                                     Explore Features
                                 </Button>
                             </div>
                         </div>
-                        <div className="relative">
-                            <div className="aspect-square bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl flex items-center justify-center">
-                                <div className="text-center p-8">
-                                    <GraduationCap className="w-32 h-32 text-primary-600 mx-auto mb-4" />
-                                    <p className="text-lg font-semibold text-gray-700">
-                                        Modern Education Management
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </Section>
+                </section>
 
                 {/* Stats Section */}
                 <Section background="white">
@@ -219,23 +229,44 @@ export default function Home() {
                         description="There are plenty of softwares out there, execution is where it fails. We construct executable plans that are actually implemented on a daily basis for managing your Institute."
                     />
                     <div className="grid md:grid-cols-3 gap-8">
-                        <div className="card text-center">
-                            <Cpu className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                            <h3 className="text-xl font-semibold mb-3">Hardware</h3>
+                        <div className="card text-center group hover:shadow-xl transition-all duration-300">
+                            <div className="relative w-24 h-24 mx-auto mb-6">
+                                <Image
+                                    src="/images/hardware.png"
+                                    alt="Hardware Integration"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 group-hover:text-primary-600 transition-colors">Hardware</h3>
                             <p className="text-gray-600">
                                 Integrate the required hardware on-site for drastic upgrade reducing manual work and errors.
                             </p>
                         </div>
-                        <div className="card text-center">
-                            <Settings className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                            <h3 className="text-xl font-semibold mb-3">Onfees Implementation Framework</h3>
+                        <div className="card text-center group hover:shadow-xl transition-all duration-300">
+                            <div className="relative w-24 h-24 mx-auto mb-6">
+                                <Image
+                                    src="/images/onfees_vector.png"
+                                    alt="Implementation Framework"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 group-hover:text-primary-600 transition-colors">Onfees Implementation Framework</h3>
                             <p className="text-gray-600">
                                 A brief outline for aligning all tasks towards implementing software for an Institute with consistency.
                             </p>
                         </div>
-                        <div className="card text-center">
-                            <BarChart3 className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                            <h3 className="text-xl font-semibold mb-3">Software</h3>
+                        <div className="card text-center group hover:shadow-xl transition-all duration-300">
+                            <div className="relative w-24 h-24 mx-auto mb-6">
+                                <Image
+                                    src="/images/software.png"
+                                    alt="Software Solutions"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 group-hover:text-primary-600 transition-colors">Software</h3>
                             <p className="text-gray-600">
                                 Software evolution and personalization with ever changing business dynamics is what matters.
                             </p>
@@ -252,8 +283,8 @@ export default function Home() {
                     />
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {implementationSteps.map((step, index) => (
-                            <div key={index} className="card">
-                                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 text-primary-600 font-bold text-xl mb-4">
+                            <div key={index} className="card hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 text-white font-bold text-xl mb-4 shadow-lg">
                                     {index + 1}
                                 </div>
                                 <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
@@ -307,9 +338,9 @@ export default function Home() {
                         {clients.map((client, index) => (
                             <div
                                 key={index}
-                                className="flex items-center justify-center p-6 bg-gray-50 rounded-lg border border-gray-200 hover:border-primary-200 hover:shadow-md transition-all"
+                                className="flex items-center justify-center p-6 bg-white rounded-lg border-2 border-gray-100 hover:border-primary-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                             >
-                                <p className="text-center text-sm font-medium text-gray-700">
+                                <p className="text-center text-sm font-semibold text-gray-700">
                                     {client}
                                 </p>
                             </div>
@@ -338,9 +369,9 @@ export default function Home() {
                         description="Structured in a way where you get the best of ROI"
                     />
                     <div className="grid md:grid-cols-3 gap-8">
-                        <div className="card">
+                        <div className="card hover:shadow-xl transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-2">Service Level 1</h3>
-                            <p className="text-gray-600 mb-6">
+                            <p className="text-gray-600 mb-6 text-sm">
                                 You have a software, IT team, implementation team but things don't seem to work.
                             </p>
                             <ul className="space-y-3 mb-8">
@@ -359,12 +390,12 @@ export default function Home() {
                             </ul>
                         </div>
 
-                        <div className="card border-2 border-primary-500 relative">
-                            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        <div className="card border-2 border-primary-500 relative hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-1.5 rounded-full text-sm font-semibold shadow-lg">
                                 Popular
                             </div>
-                            <h3 className="text-2xl font-bold mb-2">Service Level 2</h3>
-                            <p className="text-gray-600 mb-6">
+                            <h3 className="text-2xl font-bold mb-2 mt-2">Service Level 2</h3>
+                            <p className="text-gray-600 mb-6 text-sm">
                                 You have a right software, you're looking for someone to take ownership of implementing it.
                             </p>
                             <ul className="space-y-3 mb-8">
@@ -385,9 +416,9 @@ export default function Home() {
                             </ul>
                         </div>
 
-                        <div className="card">
+                        <div className="card hover:shadow-xl transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-2">Service Level 3</h3>
-                            <p className="text-gray-600 mb-6">
+                            <p className="text-gray-600 mb-6 text-sm">
                                 You'd like for entire successful implementation to kickstart from Day 0.
                             </p>
                             <ul className="space-y-3 mb-8">
@@ -421,24 +452,34 @@ export default function Home() {
                 </Section>
 
                 {/* Final CTA */}
-                <Section background="gradient">
-                    <div className="text-center max-w-3xl mx-auto">
-                        <h2 className="heading-lg mb-6">
-                            Ready to Transform Your Institution?
-                        </h2>
-                        <p className="text-xl text-gray-600 mb-8">
-                            Book a free consultation to define your institute's software implementation success strategy.
-                        </p>
-                        <Button
-                            variant="primary"
-                            size="lg"
-                            href="https://meetings.hubspot.com/viral-dedhiya"
-                        >
-                            Schedule Your Free Consultation
-                            <ArrowRight className="ml-2 w-5 h-5" />
-                        </Button>
+                <section className="relative py-20 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-blue-900" />
+                    <div className="absolute inset-0 opacity-10">
+                        <div className="absolute inset-0" style={{
+                            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                            backgroundSize: '40px 40px'
+                        }} />
                     </div>
-                </Section>
+                    <div className="container-custom relative z-10">
+                        <div className="text-center max-w-3xl mx-auto">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                                Ready to Transform Your Institution?
+                            </h2>
+                            <p className="text-xl text-blue-100 mb-8">
+                                Book a free consultation to define your institute's software implementation success strategy.
+                            </p>
+                            <Button
+                                variant="secondary"
+                                size="lg"
+                                href="https://meetings.hubspot.com/viral-dedhiya"
+                                className="bg-orange-500 hover:bg-orange-600 text-white shadow-2xl"
+                            >
+                                Schedule Your Free Consultation
+                                <ArrowRight className="ml-2 w-5 h-5" />
+                            </Button>
+                        </div>
+                    </div>
+                </section>
             </main>
 
             <Footer />

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
@@ -31,17 +32,22 @@ const Header = () => {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-white/95 backdrop-blur-md shadow-md'
-                    : 'bg-white'
+                ? 'bg-white/95 backdrop-blur-md shadow-md'
+                : 'bg-white'
                 }`}
         >
             <div className="container-custom">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="text-2xl font-bold text-gradient">
-                            Onfees
-                        </div>
+                        <Image
+                            src="/images/header_logo.png"
+                            alt="Onfees"
+                            width={120}
+                            height={40}
+                            className="h-10 w-auto"
+                            priority
+                        />
                     </Link>
 
                     {/* Desktop Navigation */}
