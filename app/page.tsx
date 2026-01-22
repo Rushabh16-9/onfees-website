@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
@@ -331,63 +333,116 @@ export default function Home() {
                     </div>
                 </Section>
 
-                {/* Trusted By - Premium Design */}
+                {/* Trusted By - Auto-Scroll Carousel */}
                 <Section background="white">
-                    <div className="text-center mb-12">
-                        <div className="inline-flex items-center justify-center px-4 py-1.5 mb-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-full">
-                            <span className="text-sm font-semibold text-orange-600 uppercase tracking-wide">Our Associations</span>
+                    <div className="text-center mb-8">
+                        <div className="inline-flex items-center justify-center px-3 py-1 mb-3 bg-gradient-to-r from-orange-50 to-orange-100 rounded-full">
+                            <span className="text-xs font-semibold text-orange-600 uppercase tracking-wide">Our Associations</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                             Trusted by Leading Institutions
                         </h2>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Partnering with prestigious educational institutions across India to deliver excellence in education management
+                        <p className="text-sm text-gray-600 max-w-xl mx-auto">
+                            Partnering with prestigious educational institutions across India
                         </p>
                     </div>
 
-                    {/* Logo Grid with Premium Design */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                        {collegeLogos.map((logo, index) => (
-                            <div
-                                key={index}
-                                className="group relative bg-white rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 border border-gray-100"
-                                style={{
-                                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)'
-                                }}
-                            >
-                                {/* Subtle gradient overlay on hover */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-orange-50/0 group-hover:from-primary-50/30 group-hover:to-orange-50/30 rounded-2xl transition-all duration-500" />
-
-                                {/* Logo Container */}
-                                <div className="relative h-24 flex items-center justify-center">
-                                    <Image
-                                        src={logo.src}
-                                        alt={logo.alt}
-                                        fill
-                                        className="object-contain p-2 transition-transform duration-500 group-hover:scale-110"
-                                    />
+                    {/* Horizontal Auto-Scroll Carousel - 2 Rows */}
+                    <div className="relative overflow-hidden py-8">
+                        {/* Row 1 - Scroll Left to Right */}
+                        <div className="flex mb-6 animate-scroll-left">
+                            {/* Duplicate logos for seamless loop */}
+                            {[...collegeLogos, ...collegeLogos].map((logo, index) => (
+                                <div
+                                    key={`row1-${index}`}
+                                    className="flex-shrink-0 mx-4 bg-white rounded-lg p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                                    style={{ width: '140px', height: '80px' }}
+                                >
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={logo.src}
+                                            alt={logo.alt}
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+
+                        {/* Row 2 - Scroll Right to Left */}
+                        <div className="flex animate-scroll-right">
+                            {/* Duplicate logos for seamless loop */}
+                            {[...collegeLogos, ...collegeLogos].map((logo, index) => (
+                                <div
+                                    key={`row2-${index}`}
+                                    className="flex-shrink-0 mx-4 bg-white rounded-lg p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                                    style={{ width: '140px', height: '80px' }}
+                                >
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={logo.src}
+                                            alt={logo.alt}
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Trust Indicators */}
-                    <div className="mt-16 pt-12 border-t border-gray-200">
-                        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
-                            <div className="space-y-2">
-                                <div className="text-3xl font-bold text-primary-600">50+</div>
-                                <div className="text-sm text-gray-600 font-medium">Partner Institutions</div>
+                    <div className="mt-12 pt-8 border-t border-gray-200">
+                        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto text-center">
+                            <div className="space-y-1">
+                                <div className="text-2xl font-bold text-primary-600">50+</div>
+                                <div className="text-xs text-gray-600 font-medium">Partner Institutions</div>
                             </div>
-                            <div className="space-y-2">
-                                <div className="text-3xl font-bold text-primary-600">100K+</div>
-                                <div className="text-sm text-gray-600 font-medium">Students Served</div>
+                            <div className="space-y-1">
+                                <div className="text-2xl font-bold text-primary-600">100K+</div>
+                                <div className="text-xs text-gray-600 font-medium">Students Served</div>
                             </div>
-                            <div className="space-y-2">
-                                <div className="text-3xl font-bold text-primary-600">7+</div>
-                                <div className="text-sm text-gray-600 font-medium">Years of Excellence</div>
+                            <div className="space-y-1">
+                                <div className="text-2xl font-bold text-primary-600">7+</div>
+                                <div className="text-xs text-gray-600 font-medium">Years of Excellence</div>
                             </div>
                         </div>
                     </div>
+
+                    {/* CSS Animations */}
+                    <style jsx>{`
+                        @keyframes scroll-left {
+                            0% {
+                                transform: translateX(0);
+                            }
+                            100% {
+                                transform: translateX(-50%);
+                            }
+                        }
+                        
+                        @keyframes scroll-right {
+                            0% {
+                                transform: translateX(-50%);
+                            }
+                            100% {
+                                transform: translateX(0);
+                            }
+                        }
+                        
+                        .animate-scroll-left {
+                            animation: scroll-left 40s linear infinite;
+                        }
+                        
+                        .animate-scroll-right {
+                            animation: scroll-right 40s linear infinite;
+                        }
+                        
+                        .animate-scroll-left:hover,
+                        .animate-scroll-right:hover {
+                            animation-play-state: paused;
+                        }
+                    `}</style>
                 </Section>
 
                 {/* Testimonials */}
