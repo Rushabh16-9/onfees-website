@@ -152,17 +152,20 @@ export default function Home() {
         { value: '99.9%', label: 'Uptime Guarantee' },
     ];
 
-    const clients = [
-        'DY Patil College',
-        'St. Andrew\'s College',
-        'Chetana\'s College',
-        'Podar College',
-        'Wilson College',
-        'KPB Hinduja College',
-        'Ruia College',
-        'Bhavan\'s College',
-        'Royal College',
-        'St. Columba\'s School',
+    const collegeLogos = [
+        { src: '/images/colleges/dy_patil.jpeg', alt: 'DY Patil College' },
+        { src: '/images/colleges/chetanas.png', alt: 'Chetana\'s College' },
+        { src: '/images/colleges/podar.png', alt: 'Podar College' },
+        { src: '/images/colleges/kpb_hinduja.png', alt: 'KPB Hinduja College' },
+        { src: '/images/colleges/bhavans.jpg', alt: 'Bhavan\'s College' },
+        { src: '/images/colleges/royal.jpg', alt: 'Royal College' },
+        { src: '/images/colleges/st_columba.png', alt: 'St. Columba\'s School' },
+        { src: '/images/colleges/nirmala.png', alt: 'Nirmala Niketan College' },
+        { src: '/images/colleges/lala.png', alt: 'Lala Lajpatrai College' },
+        { src: '/images/colleges/glc.jpg', alt: 'Government Law College' },
+        { src: '/images/colleges/siddharth_law.png', alt: 'Siddharth Law College' },
+        { src: '/images/colleges/aissms.jpeg', alt: 'AISSMS College' },
+        { src: '/images/colleges/br_harne.jpg', alt: 'BR Harne College' },
     ];
 
     return (
@@ -175,7 +178,7 @@ export default function Home() {
                     {/* Background Image with Overlay */}
                     <div className="absolute inset-0 z-0">
                         <Image
-                            src="/images/hero_banner.jpg"
+                            src="/images/1page_one.png"
                             alt="Education Management"
                             fill
                             className="object-cover"
@@ -328,118 +331,29 @@ export default function Home() {
                     </div>
                 </Section>
 
-                {/* Trusted By */}
+                {/* Trusted By - All Logos in Full Color */}
                 <Section background="white">
                     <SectionHeader
                         subtitle="Our Associations"
                         title="Trusted by Leading Institutions"
                         description="Partnering with prestigious educational institutions across India"
                     />
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                        {/* DY Patil College */}
-                        <div className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                            <div className="relative w-full h-20">
-                                <Image
-                                    src="/images/colleges/dy_patil.jpeg"
-                                    alt="DY Patil College"
-                                    fill
-                                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        {collegeLogos.map((logo, index) => (
+                            <div
+                                key={index}
+                                className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-400 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-105"
+                            >
+                                <div className="relative w-full h-20">
+                                    <Image
+                                        src={logo.src}
+                                        alt={logo.alt}
+                                        fill
+                                        className="object-contain"
+                                    />
+                                </div>
                             </div>
-                        </div>
-
-                        {/* Chetana's College */}
-                        <div className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                            <div className="relative w-full h-20">
-                                <Image
-                                    src="/images/colleges/chetanas.png"
-                                    alt="Chetana's College"
-                                    fill
-                                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Podar College */}
-                        <div className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                            <div className="relative w-full h-20">
-                                <Image
-                                    src="/images/colleges/podar.png"
-                                    alt="Podar College"
-                                    fill
-                                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
-                            </div>
-                        </div>
-
-                        {/* KPB Hinduja College */}
-                        <div className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                            <div className="relative w-full h-20">
-                                <Image
-                                    src="/images/colleges/kpb_hinduja.png"
-                                    alt="KPB Hinduja College"
-                                    fill
-                                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Bhavan's College */}
-                        <div className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                            <div className="relative w-full h-20">
-                                <Image
-                                    src="/images/colleges/bhavans.jpg"
-                                    alt="Bhavan's College"
-                                    fill
-                                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Royal College */}
-                        <div className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                            <div className="relative w-full h-20">
-                                <Image
-                                    src="/images/colleges/royal.jpg"
-                                    alt="Royal College"
-                                    fill
-                                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
-                            </div>
-                        </div>
-
-                        {/* St. Columba's School */}
-                        <div className="flex items-center justify-center p-6 bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-                            <div className="relative w-full h-20">
-                                <Image
-                                    src="/images/colleges/st_columba.png"
-                                    alt="St. Columba's School"
-                                    fill
-                                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
-                            </div>
-                        </div>
-
-                        {/* St. Andrew's College - Text fallback */}
-                        <div className="flex items-center justify-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                            <p className="text-center text-sm font-bold text-gray-700">
-                                St. Andrew's<br />College
-                            </p>
-                        </div>
-
-                        {/* Wilson College - Text fallback */}
-                        <div className="flex items-center justify-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                            <p className="text-center text-sm font-bold text-gray-700">
-                                Wilson<br />College
-                            </p>
-                        </div>
-
-                        {/* Ruia College - Text fallback */}
-                        <div className="flex items-center justify-center p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                            <p className="text-center text-sm font-bold text-gray-700">
-                                Ruia<br />College
-                            </p>
-                        </div>
+                        ))}
                     </div>
                 </Section>
 
