@@ -50,7 +50,7 @@ export default function FeaturesPage() {
             imageSrc: '/images/features/document-management.png',
             title: 'Document Management',
             description: 'Simplify documentation by scanning, tagging, and assigning documents to employees for all-time access, drastically cutting down paperwork.',
-            href: '#',
+            href: '/features/document-management',
         },
         {
             imageSrc: '/images/features/hr-payroll.png',
@@ -68,7 +68,7 @@ export default function FeaturesPage() {
             imageSrc: '/images/features/admission.png', // Reusing admission image or I need a placeholder for attendance if I didn't download it. Let's check. I have 7 images. Attendance was #8 in the list but not in the images. I'll use a placeholder or reuse one.
             title: 'Attendance Management',
             description: 'Automated attendance tracking for students and staff with real-time reporting and analytics.',
-            href: '#',
+            href: '/features/attendance',
         },
     ];
 
