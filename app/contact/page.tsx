@@ -116,6 +116,22 @@ export default function ContactPage() {
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div className="mt-8">
+                                <h3 className="font-semibold text-gray-900 mb-4">Find Us On Map</h3>
+                                <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 h-[500px]">
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.7598480755173!2d72.9250884649018!3d19.118188537063755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c793a20b7c0b%3A0x64cb4a60671d03ad!2sOnfees!5e0!3m2!1sen!2sin!4v1679401686822!5m2!1sen!2sin"
+                                        width="100%"
+                                        height="100%"
+                                        style={{ border: 0 }}
+                                        allowFullScreen={true}
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                    ></iframe>
+                                </div>
+                            </div>
                         </div>
 
                         {/* Contact Form */}
@@ -210,7 +226,7 @@ export default function ContactPage() {
                         </div>
                     </div>
                 </Section>
-            </main>
+            </main >
 
             <Footer />
         </>

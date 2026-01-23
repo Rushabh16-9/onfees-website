@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -62,27 +63,47 @@ const Header = () => {
                         {/* Features Dropdown */}
                         <div
                             className="relative"
-                            onMouseEnter={() => setIsFeaturesOpen(true)}
-                            onMouseLeave={() => setIsFeaturesOpen(false)}
+                            onMouseEnter={() => {
+                                if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                                setIsFeaturesOpen(true);
+                            }}
+                            onMouseLeave={() => {
+                                timeoutRef.current = setTimeout(() => {
+                                    setIsFeaturesOpen(false);
+                                }, 300); // 300ms delay before closing
+                            }}
                         >
-                            <button className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 font-medium transition-colors">
+                            <Link
+                                href="/features"
+                                className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 font-medium transition-colors py-2"
+                                aria-expanded={isFeaturesOpen}
+                                onClick={(e) => {
+                                    // Optional: if clicking acts as a toggle on some devices, valid, 
+                                    // but usually for desktop navigation, acting as a Link is best.
+                                    // We just let it navigate to /features.
+                                }}
+                            >
                                 <span>Features</span>
-                                <ChevronDown className="w-4 h-4" />
-                            </button>
+                                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isFeaturesOpen ? 'rotate-180' : ''}`} />
+                            </Link>
 
-                            {isFeaturesOpen && (
-                                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-100 py-2">
-                                    {features.map((feature) => (
-                                        <Link
-                                            key={feature.href}
-                                            href={feature.href}
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-                                        >
-                                            {feature.name}
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
+                            <div
+                                className={`absolute top-full left-0 mt-0 w-64 bg-white rounded-lg shadow-xl border border-gray-100 py-2 transition-all duration-200 origin-top-left ${isFeaturesOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
+                                    }`}
+                            >
+                                {/* Invisible bridge to prevent closing when moving from button to dropdown */}
+                                <div className="absolute -top-2 left-0 w-full h-2 bg-transparent" />
+
+                                {features.map((feature) => (
+                                    <Link
+                                        key={feature.href}
+                                        href={feature.href}
+                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+                                    >
+                                        {feature.name}
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
 
                         <Link

@@ -2,6 +2,7 @@ import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
+import Image from 'next/image';
 import { Users, CheckCircle, ArrowRight, Calendar, DollarSign, BarChart3, Clock } from 'lucide-react';
 
 export default function HRPayrollPage() {
@@ -59,8 +60,13 @@ export default function HRPayrollPage() {
                             </Button>
                         </div>
                         <div className="relative">
-                            <div className="aspect-square bg-gradient-to-br from-primary-100 to-accent-100 rounded-2xl flex items-center justify-center">
-                                <Users className="w-48 h-48 text-primary-600" />
+                            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
+                                <Image
+                                    src="/images/features/hr-payroll.png"
+                                    alt="HR & Payroll Management System"
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                         </div>
                     </div>

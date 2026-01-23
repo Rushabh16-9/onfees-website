@@ -2,6 +2,7 @@ import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import { FeatureCard } from '@/components/ui/Card';
+import FeatureSection from '@/components/features/FeatureSection';
 import {
     GraduationCap,
     CreditCard,
@@ -22,52 +23,52 @@ import {
 export default function FeaturesPage() {
     const primaryModules = [
         {
-            icon: <GraduationCap className="w-6 h-6" />,
+            imageSrc: '/images/features/admission.png',
             title: 'Admission Management',
             description: 'Streamline online applications, generate merit lists, upload documents and prospectus, with automated workflows and targeted communication.',
             href: '/features/admission',
         },
         {
-            icon: <CreditCard className="w-6 h-6" />,
+            imageSrc: '/images/features/fees.png',
             title: 'Fee Management',
             description: 'Fee automation with diverse payment options, transparency in communication, secure transactions, and comprehensive reporting with accounts integration.',
             href: '/features/fees',
         },
         {
-            icon: <FileText className="w-6 h-6" />,
+            imageSrc: '/images/features/examination.png',
             title: 'Examination Management',
             description: 'End-to-end solution for offline and online exam conduction with pre-examination, real-time, and post-examination activities with deep analysis.',
             href: '/features/examination',
         },
         {
-            icon: <BookOpen className="w-6 h-6" />,
+            imageSrc: '/images/features/lms.png',
             title: 'Learning Management System',
             description: 'Optimum management tools for virtual classroom learning with lesson planning, assignments, content sharing, and seamless teacher-student collaboration.',
             href: '/features/lms',
         },
         {
-            icon: <FolderOpen className="w-6 h-6" />,
+            imageSrc: '/images/features/document-management.png',
             title: 'Document Management',
             description: 'Simplify documentation by scanning, tagging, and assigning documents to employees for all-time access, drastically cutting down paperwork.',
-            href: '/features/document-management',
+            href: '#',
         },
         {
-            icon: <Users className="w-6 h-6" />,
+            imageSrc: '/images/features/hr-payroll.png',
             title: 'HR & Payroll',
             description: 'Comprehensive people management tracking attendance, holidays, extra classes, events, salaries, and bonuses with insightful reports.',
             href: '/features/hr-payroll',
         },
         {
-            icon: <Library className="w-6 h-6" />,
+            imageSrc: '/images/features/library.png',
             title: 'Library Management',
             description: 'RFID integrated advanced system for book purchasing, cataloging, indexing, circulation recording, and stock checking with LMS integration.',
             href: '/features/library',
         },
         {
-            icon: <UserCheck className="w-6 h-6" />,
+            imageSrc: '/images/features/admission.png', // Reusing admission image or I need a placeholder for attendance if I didn't download it. Let's check. I have 7 images. Attendance was #8 in the list but not in the images. I'll use a placeholder or reuse one.
             title: 'Attendance Management',
             description: 'Automated attendance tracking for students and staff with real-time reporting and analytics.',
-            href: '/features/attendance',
+            href: '#',
         },
     ];
 
@@ -76,37 +77,37 @@ export default function FeaturesPage() {
             icon: <MapPin className="w-6 h-6" />,
             title: 'Visitor Management',
             description: 'Track documents and letters received/sent, visitor logs with check-in/check-out, purpose tracking, and gate pass generation.',
-            href: '/features/visitor-management',
+            href: '#',
         },
         {
             icon: <Bus className="w-6 h-6" />,
             title: 'Transport Management',
             description: 'Route-wise fee collection, real-time vehicle tracking, maintenance management, and mass communication to students and staff.',
-            href: '/features/transport',
+            href: '#',
         },
         {
             icon: <Home className="w-6 h-6" />,
             title: 'Hostel Management',
             description: 'Application forms, random room allotment, RFID attendance tracking, in/out monitoring, and online fee collection for hostel and canteen.',
-            href: '/features/hostel',
+            href: '#',
         },
         {
             icon: <Calendar className="w-6 h-6" />,
             title: 'Event Management',
             description: 'Ideal partner for synchronized event activities, transparent voting processes, schedules, and alerts for students, guests, staff, and family.',
-            href: '/features/events',
+            href: '#',
         },
         {
             icon: <Globe className="w-6 h-6" />,
             title: 'Website Management',
             description: 'Professional website maintenance, security, development, content delivery, and marketing with updated browser-compatible technologies.',
-            href: '/features/website-management',
+            href: '#',
         },
         {
             icon: <Award className="w-6 h-6" />,
             title: 'OBE – Accreditation',
             description: 'Outcome-based software enabling institutions to meet NAAC, NBA guidelines, assign roles, automate assessment, and analyze reports.',
-            href: '/features/obe-accreditation',
+            href: '#',
         },
     ];
 
@@ -134,14 +135,17 @@ export default function FeaturesPage() {
                         title="Essential Features for Every Institution"
                         description="Our primary modules cover all critical aspects of educational institution management."
                     />
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="space-y-12 lg:space-y-24">
                         {primaryModules.map((module, index) => (
-                            <FeatureCard
+                            <FeatureSection
                                 key={index}
-                                icon={module.icon}
+                                index={index}
                                 title={module.title}
                                 description={module.description}
                                 href={module.href}
+                                imageSrc={module.imageSrc}
+                                imageAlt={`${module.title} Illustration`}
+                                reversed={index % 2 !== 0}
                             />
                         ))}
                     </div>
