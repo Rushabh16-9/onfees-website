@@ -2,7 +2,6 @@ import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
-import Image from 'next/image';
 import { CreditCard, CheckCircle, ArrowRight, Shield, BarChart3, Repeat, DollarSign, FileText, Bell } from 'lucide-react';
 
 export default function FeesPage() {
@@ -57,29 +56,17 @@ export default function FeesPage() {
             <main className="pt-20">
                 {/* Hero Section */}
                 <Section background="gradient" className="pt-12">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h1 className="heading-xl mb-6">
-                                <span className="text-gradient">Fee Management</span> Simplified
-                            </h1>
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                                Accurately calculate and seamlessly generate invoices for all types of fees. Our fee management module ensures transparent, secure, and efficient fee collection with complete accounts integration.
-                            </p>
-                            <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
-                                Book a Demo
-                                <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                        </div>
-                        <div className="relative">
-                            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
-                                <Image
-                                    src="/images/features/fees.png"
-                                    alt="Fee Management System"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                        </div>
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h1 className="heading-xl mb-6">
+                            <span className="text-gradient">Fee Management</span> Simplified
+                        </h1>
+                        <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Accurately calculate and seamlessly generate invoices for all types of fees. Our fee management module ensures transparent, secure, and efficient fee collection with complete accounts integration.
+                        </p>
+                        <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
+                            Book a Demo
+                            <ArrowRight className="ml-2 w-5 h-5" />
+                        </Button>
                     </div>
                 </Section>
 

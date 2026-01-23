@@ -2,7 +2,6 @@ import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
-import Image from 'next/image';
 import { Library, CheckCircle, ArrowRight, BookOpen, Scan, TrendingUp, Database } from 'lucide-react';
 
 export default function LibraryPage() {
@@ -46,29 +45,17 @@ export default function LibraryPage() {
 
             <main className="pt-20">
                 <Section background="gradient" className="pt-12">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h1 className="heading-xl mb-6">
-                                <span className="text-gradient">Library Management</span> System
-                            </h1>
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                                RFID integrated advanced library management system is the most needed module in Schools & Colleges. Increase efficiency and reduce costs in operating your library with cutting-edge technology.
-                            </p>
-                            <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
-                                Book a Demo
-                                <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                        </div>
-                        <div className="relative">
-                            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
-                                <Image
-                                    src="/images/features/library.png"
-                                    alt="Library Management System"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                        </div>
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h1 className="heading-xl mb-6">
+                            <span className="text-gradient">Library Management</span> System
+                        </h1>
+                        <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                            RFID integrated advanced library management system is the most needed module in Schools & Colleges. Increase efficiency and reduce costs in operating your library with cutting-edge technology.
+                        </p>
+                        <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
+                            Book a Demo
+                            <ArrowRight className="ml-2 w-5 h-5" />
+                        </Button>
                     </div>
                 </Section>
 

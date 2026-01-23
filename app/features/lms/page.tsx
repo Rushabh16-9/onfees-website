@@ -2,7 +2,6 @@ import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
-import Image from 'next/image';
 import { BookOpen, CheckCircle, ArrowRight, Video, FileText, Users, Calendar } from 'lucide-react';
 
 export default function LMSPage() {
@@ -39,29 +38,17 @@ export default function LMSPage() {
 
             <main className="pt-20">
                 <Section background="gradient" className="pt-12">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h1 className="heading-xl mb-6">
-                                <span className="text-gradient">Learning Management System</span>
-                            </h1>
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                                Onfees LMS provides optimum management tools to enhance the overall virtual classroom learning experience. Empower teachers, engage students, and modernize your institution's education delivery.
-                            </p>
-                            <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
-                                Book a Demo
-                                <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                        </div>
-                        <div className="relative">
-                            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
-                                <Image
-                                    src="/images/features/lms.png"
-                                    alt="Learning Management System"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                        </div>
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h1 className="heading-xl mb-6">
+                            <span className="text-gradient">Learning Management System</span>
+                        </h1>
+                        <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Onfees LMS provides optimum management tools to enhance the overall virtual classroom learning experience. Empower teachers, engage students, and modernize your institution's education delivery.
+                        </p>
+                        <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
+                            Book a Demo
+                            <ArrowRight className="ml-2 w-5 h-5" />
+                        </Button>
                     </div>
                 </Section>
 

@@ -2,7 +2,6 @@ import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
-import Image from 'next/image';
 import { GraduationCap, CheckCircle, ArrowRight, Users, FileCheck, TrendingUp, Mail, Workflow } from 'lucide-react';
 
 export default function AdmissionPage() {
@@ -55,29 +54,17 @@ export default function AdmissionPage() {
             <main className="pt-20">
                 {/* Hero Section */}
                 <Section background="gradient" className="pt-12">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h1 className="heading-xl mb-6">
-                                <span className="text-gradient">Admission Management</span> Made Simple
-                            </h1>
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                                Streamline your entire admission process from application to enrollment. Our admission module is designed to cater to the complete admission lifecycle, simplifying it and saving valuable time and manpower.
-                            </p>
-                            <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
-                                Book a Demo
-                                <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                        </div>
-                        <div className="relative">
-                            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
-                                <Image
-                                    src="/images/features/admission.png"
-                                    alt="Admission Management System"
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
-                        </div>
+                    <div className="text-center max-w-4xl mx-auto">
+                        <h1 className="heading-xl mb-6">
+                            <span className="text-gradient">Admission Management</span> Made Simple
+                        </h1>
+                        <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Streamline your entire admission process from application to enrollment. Our admission module is designed to cater to the complete admission lifecycle, simplifying it and saving valuable time and manpower.
+                        </p>
+                        <Button variant="primary" size="lg" href="https://meetings.hubspot.com/viral-dedhiya">
+                            Book a Demo
+                            <ArrowRight className="ml-2 w-5 h-5" />
+                        </Button>
                     </div>
                 </Section>
 
