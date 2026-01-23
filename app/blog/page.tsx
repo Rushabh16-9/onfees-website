@@ -1,8 +1,20 @@
+import { Metadata } from 'next';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import { BookOpen, Calendar, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Blog - Education ERP Insights & Best Practices',
+    description: 'Read the latest articles about education ERP, digital transformation, fee management, and best practices for educational institutions.',
+    keywords: ['education blog', 'ERP insights', 'digital transformation', 'education technology', 'best practices', 'school management'],
+    openGraph: {
+        title: 'Blog - Education ERP Insights | Onfees',
+        description: 'Latest articles about education ERP and digital transformation.',
+        url: 'https://www.onfees.com/blog',
+    },
+};
 
 export default function BlogPage() {
     const blogPosts = [

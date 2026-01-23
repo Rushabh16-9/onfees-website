@@ -1,8 +1,21 @@
+import { Metadata } from 'next';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import { BookOpen, CheckCircle, ArrowRight, Video, FileText, Users, Calendar } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'Learning Management System (LMS) - Virtual Classroom Platform',
+    description: 'Enhance virtual classroom learning with lesson planning, assignments, video lectures, and seamless collaboration between teachers and students.',
+    keywords: ['learning management system', 'LMS', 'virtual classroom', 'online learning', 'e-learning platform', 'lesson planning', 'assignment management'],
+    openGraph: {
+        title: 'Learning Management System (LMS) | Onfees',
+        description: 'Virtual classroom platform with lesson planning, assignments, and collaboration tools.',
+        url: 'https://www.onfees.com/features/lms',
+    },
+};
 
 export default function LMSPage() {
     const teacherFeatures = [

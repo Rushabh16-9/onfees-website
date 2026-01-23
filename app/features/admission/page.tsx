@@ -1,8 +1,21 @@
+import { Metadata } from 'next';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import { GraduationCap, CheckCircle, ArrowRight, Users, FileCheck, TrendingUp, Mail, Workflow } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'Admission Management System - Streamline Student Admissions',
+    description: 'Automate online applications, generate merit lists, upload documents and prospectus with targeted communication. Simplify your admission process.',
+    keywords: ['admission management', 'online admission', 'student enrollment', 'merit list generation', 'application tracking', 'admission automation'],
+    openGraph: {
+        title: 'Admission Management System | Onfees',
+        description: 'Streamline online applications, generate merit lists, and automate admission workflows.',
+        url: 'https://www.onfees.com/features/admission',
+    },
+};
 
 export default function AdmissionPage() {
     const features = [

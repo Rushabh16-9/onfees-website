@@ -1,8 +1,21 @@
+import { Metadata } from 'next';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import { Users, CheckCircle, ArrowRight, Calendar, DollarSign, BarChart3, Clock } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'HR & Payroll Management - Staff Management System',
+    description: 'Comprehensive staff management with attendance tracking, payroll processing, leave management, and insightful reports for educational institutions.',
+    keywords: ['HR management', 'payroll software', 'staff management', 'attendance tracking', 'leave management', 'salary processing', 'employee management'],
+    openGraph: {
+        title: 'HR & Payroll Management System | Onfees',
+        description: 'Complete staff management with attendance, payroll, and comprehensive reporting.',
+        url: 'https://www.onfees.com/features/hr-payroll',
+    },
+};
 
 export default function HRPayrollPage() {
     const features = [

@@ -1,8 +1,21 @@
+import { Metadata } from 'next';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import { FileText, CheckCircle, ArrowRight, ClipboardCheck, BarChart3, Calendar } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'Examination Management System - Online & Offline Exams',
+    description: 'End-to-end exam solution for offline and online examinations with deep result analysis, automated grading, and comprehensive reporting.',
+    keywords: ['examination management', 'online exam', 'exam automation', 'result analysis', 'grading system', 'exam scheduling'],
+    openGraph: {
+        title: 'Examination Management System | Onfees',
+        description: 'Complete exam solution with automated grading and deep result analysis.',
+        url: 'https://www.onfees.com/features/examination',
+    },
+};
 
 export default function ExaminationPage() {
     const features = [

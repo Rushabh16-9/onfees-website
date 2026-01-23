@@ -1,8 +1,21 @@
+import { Metadata } from 'next';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import { Library, CheckCircle, ArrowRight, BookOpen, Scan, TrendingUp, Database } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'Library Management System - RFID Integrated Solution',
+    description: 'Advanced RFID-integrated library system for cataloging, circulation, and stock management. Streamline your library operations.',
+    keywords: ['library management', 'RFID library', 'library automation', 'book cataloging', 'circulation system', 'library software'],
+    openGraph: {
+        title: 'Library Management System | Onfees',
+        description: 'RFID-integrated library system for cataloging, circulation, and stock management.',
+        url: 'https://www.onfees.com/features/library',
+    },
+};
 
 export default function LibraryPage() {
     const features = [

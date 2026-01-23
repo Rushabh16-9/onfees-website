@@ -1,8 +1,22 @@
+import { Metadata } from 'next';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import { CreditCard, CheckCircle, ArrowRight, Shield, BarChart3, Repeat, DollarSign, FileText, Bell } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'Fee Management System - Automate Fee Collection',
+    description: 'Streamline fee collection with automated invoicing, multiple payment options, transparent communication, and comprehensive reporting. Trusted by 50+ institutions.',
+    keywords: ['fee management', 'online fee payment', 'fee automation', 'digital fee collection', 'cashless payment', 'fee tracking', 'payment gateway integration'],
+    openGraph: {
+        title: 'Fee Management System - Automate Fee Collection | Onfees',
+        description: 'Streamline fee collection with automated invoicing, multiple payment options, and comprehensive reporting.',
+        url: 'https://www.onfees.com/features/fees',
+    },
+};
+
 
 export default function FeesPage() {
     const features = [
@@ -56,6 +70,14 @@ export default function FeesPage() {
             <main className="pt-20">
                 {/* Hero Section */}
                 <Section background="gradient" className="pt-12">
+                    <div className="container-custom">
+                        <BreadcrumbSchema
+                            items={[
+                                { label: 'Features', href: '/features' },
+                                { label: 'Fee Management', href: '/features/fees' }
+                            ]}
+                        />
+                    </div>
                     <div className="text-center max-w-4xl mx-auto">
                         <h1 className="heading-xl mb-6">
                             <span className="text-gradient">Fee Management</span> Simplified

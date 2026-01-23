@@ -8,6 +8,7 @@ import Section, { SectionHeader } from '@/components/ui/Section';
 import { FeatureCard } from '@/components/ui/Card';
 import TestimonialCard from '@/components/ui/TestimonialCard';
 import StatsDisplay from '@/components/ui/StatsDisplay';
+import HomeFAQ from '@/components/home/HomeFAQ';
 import {
     GraduationCap,
     CreditCard,
@@ -547,6 +548,9 @@ export default function Home() {
                         </Button>
                     </div>
                 </Section>
+
+                {/* FAQ Section */}
+                <HomeFAQ />
 
                 {/* Final CTA */}
                 <section className="relative py-20 overflow-hidden">
