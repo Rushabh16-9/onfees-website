@@ -5,9 +5,72 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Onfees - Complete ERP Solution for Educational Institutes",
-    description: "Leading education ERP platform for schools and colleges. Manage admissions, fees, examinations, LMS, HR, library, and more with Onfees.",
-    keywords: "education ERP, school management software, college ERP, fee management, online admission, examination software, LMS, HR payroll",
+    title: {
+        default: "Onfees - Complete ERP Solution for Educational Institutes",
+        template: "%s | Onfees"
+    },
+    description: "Leading education ERP platform for schools and colleges. Manage admissions, fees, examinations, LMS, HR, library, and more with Onfees. Trusted by 100+ institutions across India.",
+    keywords: [
+        "education ERP",
+        "school management software",
+        "college ERP",
+        "fee management system",
+        "online admission software",
+        "examination management",
+        "learning management system",
+        "HR payroll software",
+        "library management",
+        "student information system",
+        "educational institution software",
+        "digital fee collection",
+        "cashless payment",
+        "RFID library system"
+    ],
+    authors: [{ name: "Onfees" }],
+    creator: "Onfees",
+    publisher: "Onfees",
+    metadataBase: new URL('https://www.onfees.com'),
+    alternates: {
+        canonical: '/',
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'en_IN',
+        url: 'https://www.onfees.com',
+        siteName: 'Onfees',
+        title: 'Onfees - Complete ERP Solution for Educational Institutes',
+        description: 'Leading education ERP platform for schools and colleges. Manage admissions, fees, examinations, LMS, HR, library, and more with Onfees.',
+        images: [
+            {
+                url: '/images/onfees_vector.png',
+                width: 1200,
+                height: 630,
+                alt: 'Onfees - Education ERP Platform',
+            }
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        site: '@Onfees',
+        creator: '@Onfees',
+        title: 'Onfees - Complete ERP Solution for Educational Institutes',
+        description: 'Leading education ERP platform for schools and colleges. Manage admissions, fees, examinations, LMS, HR, library, and more.',
+        images: ['/images/onfees_vector.png'],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
+    verification: {
+        google: 'your-google-verification-code', // Replace with actual verification code
+    },
 };
 
 export default function RootLayout({
@@ -17,6 +80,43 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className="scroll-smooth">
+            <head>
+                <link rel="icon" href="/favicon.ico" />
+                <link rel="apple-touch-icon" href="/images/header_logo.png" />
+                <meta name="theme-color" content="#3B82F6" />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Organization",
+                            "name": "Onfees",
+                            "url": "https://www.onfees.com",
+                            "logo": "https://www.onfees.com/images/header_logo.png",
+                            "description": "Complete ERP solution for educational institutes including fee management, admissions, examinations, LMS, HR, and library management.",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "138/139, Hindustan Kohinoor Complex, LBS road, Vikhroli (W)",
+                                "addressLocality": "Mumbai",
+                                "postalCode": "400083",
+                                "addressCountry": "IN"
+                            },
+                            "contactPoint": {
+                                "@type": "ContactPoint",
+                                "telephone": "+91-8104502268",
+                                "contactType": "Customer Service",
+                                "email": "info@onfees.com"
+                            },
+                            "sameAs": [
+                                "https://www.facebook.com/onfeess/",
+                                "https://twitter.com/Onfees",
+                                "https://www.linkedin.com/company/onfees.com/",
+                                "https://www.instagram.com/_onfees/"
+                            ]
+                        })
+                    }}
+                />
+            </head>
             <body className={inter.className}>{children}</body>
         </html>
     );
