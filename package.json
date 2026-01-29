@@ -10,11 +10,16 @@
         "type-check": "tsc --noEmit"
     },
     "dependencies": {
+        "@types/react-google-recaptcha": "^2.1.9",
         "framer-motion": "^12.29.0",
         "lucide-react": "^0.344.0",
         "next": "^14.2.0",
         "react": "^18.3.0",
-        "react-dom": "^18.3.0"
+        "react-dom": "^18.3.0",
+        "react-google-recaptcha": "^3.1.0",
+        "react-google-recaptcha-v3": "^1.11.0",
+        "resend": "^3.2.0",
+        "zod": "^3.22.4"
     },
     "devDependencies": {
         "@types/node": "^20.11.0",

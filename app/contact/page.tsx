@@ -1,13 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import Header from '@/components/navigation/Header';
 import Footer from '@/components/navigation/Footer';
 import Section, { SectionHeader } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
-import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, Shield } from 'lucide-react';
 
 export default function ContactPage() {
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -16,10 +18,76 @@ export default function ContactPage() {
         message: '',
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<{
+        type: 'success' | 'error' | null;
+        message: string;
+    }>({ type: null, message: '' });
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission
-        console.log('Form submitted:', formData);
+
+        // Get reCAPTCHA token
+        const recaptchaToken = recaptchaRef.current?.getValue();
+
+        if (!recaptchaToken) {
+            setSubmitStatus({
+                type: 'error',
+                message: 'Please complete the reCAPTCHA verification.',
+            });
+            return;
+        }
+
+        setIsSubmitting(true);
+        setSubmitStatus({ type: null, message: '' });
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    recaptchaToken,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setSubmitStatus({
+                    type: 'success',
+                    message: data.message || 'Your message has been sent successfully! We will get back to you soon.',
+                });
+                // Reset form
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    institution: '',
+                    message: '',
+                });
+                // Reset reCAPTCHA
+                recaptchaRef.current?.reset();
+            } else {
+                setSubmitStatus({
+                    type: 'error',
+                    message: data.error || 'Failed to send message. Please try again.',
+                });
+                // Reset reCAPTCHA on error
+                recaptchaRef.current?.reset();
+            }
+        } catch (error) {
+            setSubmitStatus({
+                type: 'error',
+                message: 'An unexpected error occurred. Please try again later.',
+            });
+            // Reset reCAPTCHA on error
+            recaptchaRef.current?.reset();
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -28,6 +96,8 @@ export default function ContactPage() {
             [e.target.name]: e.target.value,
         });
     };
+
+    const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
     return (
         <>
@@ -217,10 +287,69 @@ export default function ContactPage() {
                                         />
                                     </div>
 
-                                    <Button type="submit" variant="primary" size="lg" className="w-full">
-                                        <Send className="mr-2 w-5 h-5" />
-                                        Send Message
+                                    {/* reCAPTCHA v2 */}
+                                    <div className="flex justify-center">
+                                        {recaptchaSiteKey ? (
+                                            <ReCAPTCHA
+                                                ref={recaptchaRef}
+                                                sitekey={recaptchaSiteKey}
+                                                theme="light"
+                                            />
+                                        ) : (
+                                            <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
+                                                <p className="font-medium">⚠️ reCAPTCHA not configured</p>
+                                                <p className="mt-1">Please add NEXT_PUBLIC_RECAPTCHA_SITE_KEY to your .env.local file</p>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Status Message */}
+                                    {submitStatus.type && (
+                                        <div
+                                            className={`p-4 rounded-lg ${submitStatus.type === 'success'
+                                                ? 'bg-green-50 text-green-800 border border-green-200'
+                                                : 'bg-red-50 text-red-800 border border-red-200'
+                                                }`}
+                                        >
+                                            <p className="text-sm font-medium">{submitStatus.message}</p>
+                                        </div>
+                                    )}
+
+                                    <Button
+                                        type="submit"
+                                        variant="primary"
+                                        size="lg"
+                                        className="w-full"
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? (
+                                            <>
+                                                <div className="mr-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                                Sending...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Send className="mr-2 w-5 h-5" />
+                                                Send Message
+                                            </>
+                                        )}
                                     </Button>
+
+                                    {/* reCAPTCHA Badge Info */}
+                                    <div className="mt-4 flex items-start text-xs text-gray-500">
+                                        <Shield className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5" />
+                                        <p>
+                                            This form is protected by reCAPTCHA and the Google{' '}
+                                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">
+                                                Privacy Policy
+                                            </a>{' '}
+                                            and{' '}
+                                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:underline">
+                                                Terms of Service
+                                            </a>{' '}
+                                            apply.
+                                        </p>
+                                    </div>
                                 </form>
                             </div>
                         </div>
