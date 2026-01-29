@@ -203,7 +203,7 @@ export default function Home() {
                                 <Button
                                     variant="secondary"
                                     size="lg"
-                                    href="https://meetings.hubspot.com/viral-dedhiya"
+                                    href="/contact"
                                     className="bg-orange-500 hover:bg-orange-600 text-white shadow-xl"
                                 >
                                     Book a Free Demo
@@ -524,7 +524,7 @@ export default function Home() {
                         <Button
                             variant="primary"
                             size="lg"
-                            href="https://meetings.hubspot.com/viral-dedhiya"
+                            href="/contact"
                         >
                             Book a FREE Strategy Session
                         </Button>
@@ -554,7 +554,7 @@ export default function Home() {
                             <Button
                                 variant="secondary"
                                 size="lg"
-                                href="https://meetings.hubspot.com/viral-dedhiya"
+                                href="/contact"
                                 className="bg-orange-500 hover:bg-orange-600 text-white shadow-2xl"
                             >
                                 Schedule Your Free Consultation

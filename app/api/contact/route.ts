@@ -61,15 +61,48 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Check referer
+        // Check host and referer
         const referer = request.headers.get('referer') || '';
         const host = request.headers.get('host') || '';
-        const expectedDomain = 'onfees.com';
 
-        // Allow localhost for development
-        if (!host.includes('localhost') && !referer.includes(expectedDomain) && !host.includes(expectedDomain)) {
+        // Allowed domains
+        const isLocalhost = host.startsWith('localhost:') || host === 'localhost';
+        const isProduction = host === 'onfees.com' || host === 'www.onfees.com';
+
+        // Strict domain verification
+        if (!isLocalhost && !isProduction) {
+            console.warn(`Blocked request from unauthorized host: ${host}`);
             return NextResponse.json(
-                { error: 'Form submission is not allowed from this source.' },
+                { error: 'Form submission is not allowed from this domain.' },
+                { status: 403 }
+            );
+        }
+
+        // Referer verification (if present)
+        // Postman often sends no referer, or we can enforce it matches the host
+        if (referer) {
+            const refererUrl = new URL(referer);
+            const refererDomain = refererUrl.hostname;
+
+            // Check if referer domain matches our expected domains
+            const isAhthorizedReferer =
+                refererDomain === 'localhost' ||
+                refererDomain === 'onfees.com' ||
+                refererDomain === 'www.onfees.com';
+
+            if (!isAhthorizedReferer) {
+                console.warn(`Blocked request from unauthorized referer: ${referer}`);
+                return NextResponse.json(
+                    { error: 'Form submission is not allowed from this source.' },
+                    { status: 403 }
+                );
+            }
+        } else if (process.env.NODE_ENV === 'production') {
+            // In production, require strict Referer header to prevent direct API calls (like Postman)
+            // Browsers always send Referer for form submissions
+            console.warn('Blocked request with missing referer in production');
+            return NextResponse.json(
+                { error: 'Security check failed (missing referer).' },
                 { status: 403 }
             );
         }
