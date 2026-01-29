@@ -1,17 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { z } from 'zod';
-
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Validation schema
 const contactFormSchema = z.object({
     name: z.string().min(2, 'Name must be at least 2 characters'),
     email: z.string().email('Invalid email address'),
-    phone: z.string().optional(),
-    institution: z.string().optional(),
-    message: z.string().min(10, 'Message must be at least 10 characters'),
+    phone: z.string().min(1, 'Phone is required'),
+    institution: z.string().min(1, 'Institution name is required'),
+    message: z.string().optional(),
     recaptchaToken: z.string().min(1, 'reCAPTCHA token is required'),
 });
 
@@ -55,15 +52,25 @@ async function verifyRecaptcha(token: string): Promise<{ success: boolean; score
 
 export async function POST(request: NextRequest) {
     try {
-        // Check if API key is configured
-        if (!process.env.RESEND_API_KEY) {
-            console.error('RESEND_API_KEY is not configured');
+        // Block direct cURL requests
+        const userAgent = request.headers.get('user-agent') || '';
+        if (userAgent.toLowerCase().includes('curl')) {
             return NextResponse.json(
-                {
-                    error: 'Email service is not configured. Please contact the administrator.',
-                    details: 'Missing RESEND_API_KEY environment variable'
-                },
-                { status: 503 }
+                { error: 'Direct cURL requests are not allowed.' },
+                { status: 403 }
+            );
+        }
+
+        // Check referer
+        const referer = request.headers.get('referer') || '';
+        const host = request.headers.get('host') || '';
+        const expectedDomain = 'onfees.com';
+
+        // Allow localhost for development
+        if (!host.includes('localhost') && !referer.includes(expectedDomain) && !host.includes(expectedDomain)) {
+            return NextResponse.json(
+                { error: 'Form submission is not allowed from this source.' },
+                { status: 403 }
             );
         }
 
@@ -92,50 +99,44 @@ export async function POST(request: NextRequest) {
         // Extract form data (excluding recaptchaToken)
         const { recaptchaToken, ...formData } = validatedData;
 
-        // Send email using Resend
-        const { data, error } = await resend.emails.send({
-            from: 'Onfees Contact Form <onboarding@resend.dev>', // You'll need to update this with your verified domain
-            to: ['info@onfees.com'], // Recipient email
-            reply_to: formData.email,
-            subject: `New Contact Form Submission from ${formData.name}`,
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                    <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
-                        New Contact Form Submission
-                    </h2>
-                    
-                    <div style="margin: 20px 0;">
-                        <p style="margin: 10px 0;"><strong>Name:</strong> ${formData.name}</p>
-                        <p style="margin: 10px 0;"><strong>Email:</strong> ${formData.email}</p>
-                        ${formData.phone ? `<p style="margin: 10px 0;"><strong>Phone:</strong> ${formData.phone}</p>` : ''}
-                        ${formData.institution ? `<p style="margin: 10px 0;"><strong>Institution:</strong> ${formData.institution}</p>` : ''}
-                    </div>
-                    
-                    <div style="margin: 20px 0; padding: 15px; background-color: #f3f4f6; border-radius: 5px;">
-                        <p style="margin: 0;"><strong>Message:</strong></p>
-                        <p style="margin: 10px 0; white-space: pre-wrap;">${formData.message}</p>
-                    </div>
-                    
-                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px;">
-                        <p>This email was sent from the Onfees contact form.</p>
-                    </div>
-                </div>
-            `,
+        // Create nodemailer transporter with Gmail SMTP (exactly as PHP code)
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true, // SSL
+            auth: {
+                user: 'info.onfees@gmail.com',
+                pass: process.env.SMTP_PASSWORD || 'fnwgwfrraykctcbn',
+            },
         });
 
-        if (error) {
-            console.error('Resend error:', error);
-            return NextResponse.json(
-                { error: 'Failed to send email. Please try again later.' },
-                { status: 500 }
-            );
-        }
+        // Email content (matching PHP format)
+        const emailHtml = `
+            <h3>
+                Name: ${formData.name}<br>
+                Email: ${formData.email}<br>
+                Institute Name: ${formData.institution}<br>
+                Phone: ${formData.phone}<br>
+                Message: ${formData.message || 'No message provided'}
+            </h3>
+        `;
+
+        // Send email
+        const info = await transporter.sendMail({
+            from: 'info.onfees@gmail.com', // Same as PHP code
+            to: ['shahrushabh598@gmail.com'],
+            subject: 'Email From OnFees Contact Form',
+            html: emailHtml,
+            replyTo: formData.email,
+        });
+
+        console.log('Email sent successfully:', info.messageId);
 
         return NextResponse.json(
             {
                 success: true,
-                message: 'Your message has been sent successfully! We will get back to you soon.',
-                emailId: data?.id
+                message: 'Thank you for contacting us. We will contact you soon.',
+                emailId: info.messageId
             },
             { status: 200 }
         );
@@ -143,20 +144,41 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error('Contact form error:', error);
 
+        // Log detailed error information
+        if (error instanceof Error) {
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
+        }
+
         // Handle validation errors
         if (error instanceof z.ZodError) {
             return NextResponse.json(
                 {
-                    error: 'Invalid form data',
+                    error: 'Please fill all the fields. Try again...!',
                     details: error.errors.map(e => ({ field: e.path.join('.'), message: e.message }))
                 },
                 { status: 400 }
             );
         }
 
+        // Handle SMTP errors specifically
+        if (error instanceof Error && error.message.includes('SMTP')) {
+            return NextResponse.json(
+                {
+                    error: 'Email service error. Please contact support.',
+                    details: error.message
+                },
+                { status: 500 }
+            );
+        }
+
         // Handle other errors
         return NextResponse.json(
-            { error: 'An unexpected error occurred. Please try again later.' },
+            {
+                error: 'Something went wrong. Please try again...!',
+                details: error instanceof Error ? error.message : 'Unknown error'
+            },
             { status: 500 }
         );
     }

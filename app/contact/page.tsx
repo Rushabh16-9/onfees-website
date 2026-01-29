@@ -243,12 +243,13 @@ export default function ContactPage() {
 
                                     <div>
                                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                                            Phone
+                                            Phone *
                                         </label>
                                         <input
                                             type="tel"
                                             id="phone"
                                             name="phone"
+                                            required
                                             value={formData.phone}
                                             onChange={handleChange}
                                             className="input-field"
@@ -258,12 +259,13 @@ export default function ContactPage() {
 
                                     <div>
                                         <label htmlFor="institution" className="block text-sm font-medium text-gray-700 mb-2">
-                                            Institution Name
+                                            Institution Name *
                                         </label>
                                         <input
                                             type="text"
                                             id="institution"
                                             name="institution"
+                                            required
                                             value={formData.institution}
                                             onChange={handleChange}
                                             className="input-field"
@@ -273,12 +275,11 @@ export default function ContactPage() {
 
                                     <div>
                                         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                                            Message *
+                                            Message
                                         </label>
                                         <textarea
                                             id="message"
                                             name="message"
-                                            required
                                             rows={5}
                                             value={formData.message}
                                             onChange={handleChange}

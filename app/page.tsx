@@ -149,7 +149,7 @@ export default function Home() {
     ];
 
     const stats = [
-        { value: '7+', label: 'Years of Excellence' },
+        { value: '10+', label: 'Years of Excellence' },
         { value: '50+', label: 'Institutions Served' },
         { value: '100K+', label: 'Students Managed' },
         { value: '99.9%', label: 'Uptime Guarantee' },
@@ -390,24 +390,6 @@ export default function Home() {
                                     </div>
                                 </div>
                             ))}
-                        </div>
-                    </div>
-
-                    {/* Trust Indicators */}
-                    <div className="mt-12 pt-8 border-t border-gray-200">
-                        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto text-center">
-                            <div className="space-y-1">
-                                <div className="text-2xl font-bold text-primary-600">50+</div>
-                                <div className="text-xs text-gray-600 font-medium">Partner Institutions</div>
-                            </div>
-                            <div className="space-y-1">
-                                <div className="text-2xl font-bold text-primary-600">100K+</div>
-                                <div className="text-xs text-gray-600 font-medium">Students Served</div>
-                            </div>
-                            <div className="space-y-1">
-                                <div className="text-2xl font-bold text-primary-600">7+</div>
-                                <div className="text-xs text-gray-600 font-medium">Years of Excellence</div>
-                            </div>
                         </div>
                     </div>
 
